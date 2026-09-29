@@ -1,19 +1,29 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using EsportsTeamManagement.Models;
+using EsportsTeamManagement.Services;
+
 namespace EsportsTeamManagement.Controllers;
 
 public class HomeController : Controller
 {
-    // 1. Declare a private field to store the database context    // 1. Declare a private field to store the database context
+    // 1. Declare BOTH private fields together at the top
     private readonly EsportsTeamManagementDbContext _context;
-
-    // 2. Inject the database context through the constructor
-    public HomeController(EsportsTeamManagementDbContext context)
+    private readonly IPlayerService _playerService;
+    
+    // 2. Inject BOTH dependencies inside a single constructor
+    public HomeController(EsportsTeamManagementDbContext context, IPlayerService playerService)
     {
         _context = context;
+        _playerService = playerService;
     }
 
+    // 3. Your action method to test the service layer
+    public IActionResult Players()
+    {
+        var players = _playerService.GetPlayers();
+        return Json(players);
+    }
 
     public IActionResult Index()
     {
@@ -25,7 +35,7 @@ public class HomeController : Controller
         return View();
     }
 
-    // 3. Your temporary test action
+    // 4. Your temporary database test action
     public IActionResult Test()
     {
         try
@@ -35,7 +45,6 @@ public class HomeController : Controller
         }
         catch (Exception ex)
         {
-            // Catches and displays connection errors (like wrong server name or missing migrations)
             return Content($"Database Connection Failed: {ex.Message}");
         }
     }

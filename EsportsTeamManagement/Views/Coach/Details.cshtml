@@ -1,0 +1,30 @@
+@model EsportsTeamManagement.Models.Coach
+
+<h2>Coach Details</h2>
+
+<hr />
+
+<div class="card">
+    <div class="card-body">
+
+        <h4>@Model.CoachName</h4>
+
+        <p>
+            <strong>Experience:</strong>
+            @Model.ExperienceYears Years
+        </p>
+
+        <p>
+            <strong>Email:</strong>
+            @Model.Email
+        </p>
+
+    </div>
+</div>
+
+<br />
+
+<a asp-action="Index"
+   class="btn btn-secondary">
+    Back
+</a>

@@ -1,0 +1,35 @@
+@model EsportsTeamManagement.Models.Team
+
+<h2>Team Details</h2>
+
+<hr />
+
+<div class="card">
+    <div class="card-body">
+
+        <h4>@Model.TeamName</h4>
+
+        <p>
+            <strong>Region:</strong>
+            @Model.Region
+        </p>
+
+        <p>
+            <strong>Coach Id:</strong>
+            @Model.CoachId
+        </p>
+
+        <p>
+            <strong>Created Date:</strong>
+            @Model.CreatedDate
+        </p>
+
+    </div>
+</div>
+
+<br />
+
+<a asp-action="Index"
+   class="btn btn-secondary">
+    Back
+</a>

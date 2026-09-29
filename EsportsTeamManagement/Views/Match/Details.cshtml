@@ -1,0 +1,19 @@
+@model EsportsTeamManagement.Models.MatchDetail
+
+<h2>Match Details</h2>
+
+<div class="card">
+    <div class="card-body">
+
+        <p><strong>Tournament:</strong> @Model.Tournament?.TournamentName</p>
+
+        <p><strong>Team 1:</strong> @Model.Team1?.TeamName</p>
+
+        <p><strong>Team 2:</strong> @Model.Team2?.TeamName</p>
+
+        <p><strong>Winner:</strong> @Model.WinnerTeam?.TeamName</p>
+
+        <p><strong>Date:</strong> @Model.MatchDate</p>
+
+    </div>
+</div>

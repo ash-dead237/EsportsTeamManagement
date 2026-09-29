@@ -229,3 +229,4 @@ C:\Users\shashraf\OneDrive - Capgemini\EsportsTeamManagement\EsportsTeamManageme
 C:\Users\shashraf\OneDrive - Capgemini\EsportsTeamManagement\EsportsTeamManagement\bin\Debug\net10.0\runtimes\win-x86\native\msalruntime_x86.dll
 C:\Users\shashraf\OneDrive - Capgemini\EsportsTeamManagement\EsportsTeamManagement\obj\Debug\net10.0\EsportsTeamManagement.csproj.AssemblyReference.cache
 C:\Users\shashraf\OneDrive - Capgemini\EsportsTeamManagement\EsportsTeamManagement\obj\Debug\net10.0\EsportsT.A1A2D663.Up2Date
+C:\Users\shashraf\OneDrive - Capgemini\EsportsTeamManagement\EsportsTeamManagement\obj\Debug\net10.0\EsportsTeamManagement.sourcelink.json

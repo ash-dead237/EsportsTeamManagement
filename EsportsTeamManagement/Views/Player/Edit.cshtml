@@ -1,0 +1,51 @@
+@model EsportsTeamManagement.ViewModels.PlayerViewModel
+
+<h2>Edit Player</h2>
+
+<form asp-action="Edit" method="post">
+
+    <div class="mb-3">
+        <label>Player Name</label>
+        <input asp-for="PlayerName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Age</label>
+        <input asp-for="Age" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Country</label>
+        <input asp-for="Country" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Game Role</label>
+        <input asp-for="GameRole" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Rank</label>
+        <input asp-for="PlayerRank" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Team</label>
+
+        <select asp-for="TeamId"
+                asp-items="Model.Teams"
+                class="form-control">
+        </select>
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary">
+        Update Player
+    </button>
+
+    <a asp-action="Index"
+       class="btn btn-secondary">
+        Back
+    </a>
+
+</form>

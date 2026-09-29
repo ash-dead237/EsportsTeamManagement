@@ -1,0 +1,60 @@
+@model List<EsportsTeamManagement.Models.Tournament>
+
+<h2>Tournaments</h2>
+
+<a asp-action="Create"
+   class="btn btn-success mb-3">
+    Add Tournament
+</a>
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Prize Pool</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    @foreach(var tournament in Model)
+    {
+        <tr>
+            <td>@tournament.TournamentName</td>
+            <td>@tournament.Location</td>
+            <td>@tournament.PrizePool</td>
+            <td>@tournament.StartDate</td>
+            <td>@tournament.EndDate</td>
+
+            <td>
+
+                <a asp-action="Details"
+                   asp-route-id="@tournament.TournamentId"
+                   class="btn btn-info btn-sm">
+                    Details
+                </a>
+
+                <a asp-action="Edit"
+                   asp-route-id="@tournament.TournamentId"
+                   class="btn btn-warning btn-sm">
+                    Edit
+                </a>
+
+                <a asp-action="Delete"
+                   asp-route-id="@tournament.TournamentId"
+                   class="btn btn-danger btn-sm">
+                    Delete
+                </a>
+
+            </td>
+        </tr>
+    }
+
+    </tbody>
+
+</table>

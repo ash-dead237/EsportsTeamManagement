@@ -1,0 +1,50 @@
+@model List<EsportsTeamManagement.Models.Team>
+
+<h2>Teams</h2>
+
+<!-- The Create Team button with green success styling -->
+<a asp-action="Create" class="btn btn-success mb-3">
+    Add Team
+</a>
+
+<!-- Updated Table Grid with Action Buttons -->
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Team Name</th>
+            <th>Region</th>
+            <th>Actions</th> <!-- Added actions column heading -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var team in Model)
+        {
+            <tr>
+                <td>@team.TeamName</td>
+                <td>@team.Region</td>
+                <td>
+                    <!-- 👇 Added: Details button directing to Details action matching TeamId -->
+                    <a asp-action="Details"
+                       asp-route-id="@team.TeamId"
+                       class="btn btn-info btn-sm">
+                        Details
+                    </a>
+
+                    <!-- Edit button directing to Edit action matching TeamId -->
+                    <a asp-action="Edit"
+                       asp-route-id="@team.TeamId"
+                       class="btn btn-warning btn-sm">
+                        Edit
+                    </a>
+
+                    <!-- Delete button directing to Delete action matching TeamId -->
+                    <a asp-action="Delete"
+                       asp-route-id="@team.TeamId"
+                       class="btn btn-danger btn-sm">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

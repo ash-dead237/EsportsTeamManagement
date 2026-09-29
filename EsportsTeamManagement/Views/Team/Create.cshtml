@@ -1,0 +1,25 @@
+@model EsportsTeamManagement.ViewModels.TeamViewModel
+
+<h2>Create Team</h2>
+
+<form asp-action="Create" method="post">
+
+    <div>
+        <label>Team Name</label>
+        <input asp-for="TeamName" class="form-control" />
+    </div>
+
+    <br />
+
+    <div>
+        <label>Region</label>
+        <input asp-for="Region" class="form-control" />
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">
+        Save Team
+    </button>
+
+</form>

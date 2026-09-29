@@ -1,0 +1,42 @@
+@model EsportsTeamManagement.Models.Tournament
+
+<h2>Tournament Details</h2>
+
+<hr />
+
+<div class="card">
+
+    <div class="card-body">
+
+        <h4>@Model.TournamentName</h4>
+
+        <p>
+            <strong>Location:</strong>
+            @Model.Location
+        </p>
+
+        <p>
+            <strong>Prize Pool:</strong>
+            @Model.PrizePool
+        </p>
+
+        <p>
+            <strong>Start Date:</strong>
+            @Model.StartDate
+        </p>
+
+        <p>
+            <strong>End Date:</strong>
+            @Model.EndDate
+        </p>
+
+    </div>
+
+</div>
+
+<br />
+
+<a asp-action="Index"
+   class="btn btn-secondary">
+    Back
+</a>

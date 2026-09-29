@@ -1,5 +1,7 @@
 using EsportsTeamManagement.Models;
 using Microsoft.EntityFrameworkCore;
+using EsportsTeamManagement.Repository;
+using EsportsTeamManagement.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,7 +11,22 @@ builder.Services.AddDbContext<EsportsTeamManagementDbContext>(
     options =>
         options.UseSqlServer(
             builder.Configuration.GetConnectionString("DefaultConnection")));
-
+builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
+builder.Services.AddScoped<IPlayerService, PlayerService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IDashboardRepository,DashboardRepository>();
+builder.Services.AddScoped<IDashboardService, DashboardService>();
+builder.Services.AddScoped<ITeamRepository, TeamRepository>();
+builder.Services.AddScoped<ITeamService, TeamService>();
+builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
+builder.Services.AddScoped<IPlayerService, PlayerService>();
+builder.Services.AddScoped<ICoachRepository, CoachRepository>();
+builder.Services.AddScoped<ICoachService, CoachService>();
+builder.Services.AddScoped<ITournamentRepository, TournamentRepository>();
+builder.Services.AddScoped<ITournamentService, TournamentService>();
+builder.Services.AddScoped<IMatchRepository, MatchRepository>();
+builder.Services.AddScoped<IMatchService, MatchService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

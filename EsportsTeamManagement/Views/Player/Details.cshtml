@@ -1,0 +1,45 @@
+@model EsportsTeamManagement.Models.Player
+
+<h2>Player Details</h2>
+
+<hr />
+
+<div class="card">
+    <div class="card-body">
+
+        <h4>@Model.PlayerName</h4>
+
+        <p>
+            <strong>Age:</strong>
+            @Model.Age
+        </p>
+
+        <p>
+            <strong>Country:</strong>
+            @Model.Country
+        </p>
+
+        <p>
+            <strong>Role:</strong>
+            @Model.GameRole
+        </p>
+
+        <p>
+            <strong>Rank:</strong>
+            @Model.PlayerRank
+        </p>
+
+        <p>
+            <strong>Team:</strong>
+            @Model.Team?.TeamName
+        </p>
+
+    </div>
+</div>
+
+<br />
+
+<a asp-action="Index"
+   class="btn btn-secondary">
+    Back
+</a>

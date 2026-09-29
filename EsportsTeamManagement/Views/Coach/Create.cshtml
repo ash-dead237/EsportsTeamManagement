@@ -1,0 +1,30 @@
+@model CoachViewModel
+
+<h2>Add Coach</h2>
+
+<form method="post">
+
+    <div class="mb-3">
+        <label>Coach Name</label>
+        <input asp-for="CoachName"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Experience Years</label>
+        <input asp-for="ExperienceYears"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Email</label>
+        <input asp-for="Email"
+               class="form-control" />
+    </div>
+
+    <button type="submit"
+            class="btn btn-success">
+        Save Coach
+    </button>
+
+</form>

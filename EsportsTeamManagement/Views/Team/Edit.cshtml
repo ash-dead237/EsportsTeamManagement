@@ -1,0 +1,27 @@
+@model EsportsTeamManagement.ViewModels.TeamViewModel
+
+<h2>Edit Team</h2>
+
+<form method="post">
+
+    <div class="mb-3">
+        <label>Team Name</label>
+        <input asp-for="TeamName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Region</label>
+        <input asp-for="Region" class="form-control" />
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary">
+        Update Team
+    </button>
+
+    <a asp-action="Index"
+       class="btn btn-secondary">
+        Back
+    </a>
+
+</form>

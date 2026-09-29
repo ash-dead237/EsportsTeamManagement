@@ -1,0 +1,54 @@
+@model List<EsportsTeamManagement.Models.Player>
+
+<h2>Players</h2>
+
+<a asp-action="Create" class="btn btn-success mb-3">
+    Add Player
+</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Country</th>
+            <th>Role</th>
+            <th>Rank</th>
+            <th>Team</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var player in Model)
+        {
+            <tr>
+                <td>@player.PlayerName</td>
+                <td>@player.Country</td>
+                <td>@player.GameRole</td>
+                <td>@player.PlayerRank</td>
+                <td>@player.Team?.TeamName</td>
+                <td>
+                    <!-- Details button directing to Details action matching PlayerId -->
+                    <a asp-action="Details"
+                       asp-route-id="@player.PlayerId"
+                       class="btn btn-info btn-sm">
+                        Details
+                    </a>
+
+                    <!-- 👇 Updated: Edit button directing to Edit action matching PlayerId -->
+                    <a asp-action="Edit"
+                       asp-route-id="@player.PlayerId"
+                       class="btn btn-warning btn-sm">
+                        Edit
+                    </a>
+
+                    <!-- Delete button directing to Delete action matching PlayerId -->
+                    <a asp-action="Delete"
+                       asp-route-id="@player.PlayerId"
+                       class="btn btn-danger btn-sm">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

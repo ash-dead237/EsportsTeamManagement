@@ -1,0 +1,45 @@
+@model EsportsTeamManagement.ViewModels.MatchViewModel
+
+<h2>Schedule Match</h2>
+
+<form method="post">
+
+<select asp-for="TournamentId"
+        asp-items="Model.Tournaments"
+        class="form-control">
+</select>
+
+<br/>
+
+<select asp-for="Team1Id"
+        asp-items="Model.Teams"
+        class="form-control">
+</select>
+
+<br/>
+
+<select asp-for="Team2Id"
+        asp-items="Model.Teams"
+        class="form-control">
+</select>
+
+<br/>
+
+<select asp-for="WinnerTeamId"
+        asp-items="Model.Teams"
+        class="form-control">
+</select>
+
+<br/>
+
+<input asp-for="MatchDate"
+       type="datetime-local"
+       class="form-control"/>
+
+<br/>
+
+<button class="btn btn-success">
+Save Match
+</button>
+
+</form>
