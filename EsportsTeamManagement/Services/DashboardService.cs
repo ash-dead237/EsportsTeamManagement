@@ -1,5 +1,6 @@
 using EsportsTeamManagement.Repository;
 using EsportsTeamManagement.ViewModels;
+using EsportsTeamManagement.Models;
 
 namespace EsportsTeamManagement.Services
 {
@@ -17,5 +18,15 @@ namespace EsportsTeamManagement.Services
         {
             return _dashboardRepository.GetDashboardData();
         }
+        public List<TeamLeaderboard> GetLeaderboard()
+        {
+            return _dashboardRepository.GetLeaderboard();
+        }
+        public List<TopTeamViewModel> GetTopTeams()
+        {
+            return _dashboardRepository.GetTopTeams();
+        }
+
+
     }
 }

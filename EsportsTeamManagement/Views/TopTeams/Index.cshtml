@@ -1,0 +1,26 @@
+@model List<EsportsTeamManagement.ViewModels.TopTeamViewModel>
+
+<h2>Top Teams</h2>
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <th>Team Name</th>
+            <th>Wins</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    @foreach(var team in Model)
+    {
+        <tr>
+            <td>@team.TeamName</td>
+            <td>@team.Wins</td>
+        </tr>
+    }
+
+    </tbody>
+
+</table>

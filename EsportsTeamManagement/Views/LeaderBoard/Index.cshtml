@@ -1,0 +1,28 @@
+@model List<EsportsTeamManagement.Models.TeamLeaderboard>
+
+<h2>Leaderboard</h2>
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Team</th>
+            <th>Total Wins</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    @foreach(var team in Model)
+    {
+        <tr>
+            <td>@team.Ranking</td>
+            <td>@team.TeamName</td>
+            <td>@team.TotalWins</td>
+        </tr>
+    }
+
+    </tbody>
+
+</table>

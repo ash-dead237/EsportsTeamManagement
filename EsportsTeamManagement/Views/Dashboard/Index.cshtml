@@ -10,3 +10,96 @@
     <h3>Total Coaches : @Model.TotalCoaches</h3>
     <h3>Total Tournaments : @Model.TotalTournaments</h3>
 </div>
+
+<hr />
+
+<h3>Top Teams</h3>
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <th>Team Name</th>
+            <th>Wins</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    @foreach(var team in Model.TopTeams)
+    {
+        <tr>
+            <td>@team.TeamName</td>
+            <td>@team.Wins</td>
+        </tr>
+    }
+
+    </tbody>
+
+</table>
+<hr />
+
+<h3>Leaderboard</h3>
+
+<table class="table table-striped">
+
+    <thead>
+
+        <tr>
+            <th>Rank</th>
+            <th>Team Name</th>
+            <th>Total Wins</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+    @foreach(var team in Model.Leaderboard)
+    {
+        <tr>
+            <td>@team.Ranking</td>
+            <td>@team.TeamName</td>
+            <td>@team.TotalWins</td>
+        </tr>
+    }
+
+    </tbody>
+
+</table>
+
+<hr />
+
+<h3>Recent Matches</h3>
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <th>Team 1</th>
+            <th>Team 2</th>
+            <th>Winner</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    @foreach(var match in Model.RecentMatches)
+    {
+        <tr>
+
+            <td>@match.Team1?.TeamName</td>
+
+            <td>@match.Team2?.TeamName</td>
+
+            <td>@match.WinnerTeam?.TeamName</td>
+
+            <td>@match.MatchDate</td>
+
+        </tr>
+    }
+
+    </tbody>
+
+</table>

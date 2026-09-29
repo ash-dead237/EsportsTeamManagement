@@ -14,6 +14,9 @@ public partial class EsportsTeamManagementDbContext : DbContext
         : base(options)
     {
     }
+    public virtual DbSet<TeamLeaderboard> TeamLeaderboards { get; set; }
+    //public virtual DbSet<EsportsTeamManagement.ViewModels.TeamLeaderboardViewModel> TeamLeaderboards { get; set; }
+
 
     public virtual DbSet<Coach> Coaches { get; set; }
 
@@ -30,6 +33,13 @@ public partial class EsportsTeamManagementDbContext : DbContext
     public virtual DbSet<User> Users { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        
+        modelBuilder.Entity<TeamLeaderboard>(entity =>
+{
+    entity.HasNoKey();
+    entity.ToView("vw_TeamLeaderboard");
+});
+
         modelBuilder.Entity<Coach>(entity =>
         {
             entity.HasKey(e => e.CoachId).HasName("PK__Coach__F411D941B94E3488");
