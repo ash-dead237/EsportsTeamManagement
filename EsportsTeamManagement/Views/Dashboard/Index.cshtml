@@ -1,105 +1,413 @@
+@*@model EsportsTeamManagement.ViewModels.DashboardViewModel
+@{
+    var role = Context.Session.GetString("Role");
+}
+
+<div class="container my-4">
+    <!-- Header Summary Stats (Visible to All Roles) -->
+    <div class="row text-center mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white p-3 mb-2 shadow-sm">
+                <h5>Total Players</h5>
+                <h3>@Model.TotalPlayers</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white p-3 mb-2 shadow-sm">
+                <h5>Total Teams</h5>
+                <h3>@Model.TotalTeams</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-dark p-3 mb-2 shadow-sm">
+                <h5>Total Coaches</h5>
+                <h3>@Model.TotalCoaches</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white p-3 mb-2 shadow-sm">
+                <h5>Total Tournaments</h5>
+                <h3>@Model.TotalTournaments</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= ADMIN DASHBOARD ================= -->
+    @if (role == "Admin")
+    {
+        <div class="admin-section mb-5">
+            <h2 class="border-bottom pb-2 text-primary">Admin Dashboard</h2>
+            
+            <h4 class="my-3">Management Modules</h4>
+            <div class="row">
+                <div class="col-md-4 col-lg-2 mb-3">
+                    <a asp-controller="Team" asp-action="Index" class="btn btn-primary w-100 py-3 shadow-sm">
+                        <i class="bi bi-people-fill d-block mb-1"></i> Team Management
+                    </a>
+                </div>
+                <div class="col-md-4 col-lg-2 mb-3">
+                    <a asp-controller="Player" asp-action="Index" class="btn btn-success w-100 py-3 shadow-sm">
+                        <i class="bi bi-person-fill d-block mb-1"></i> Player Management
+                    </a>
+                </div>
+                <div class="col-md-4 col-lg-2 mb-3">
+                    <a asp-controller="Coach" asp-action="Index" class="btn btn-warning w-100 py-3 shadow-sm">
+                        <i class="bi bi-person-badge-fill d-block mb-1"></i> Coach Management
+                    </a>
+                </div>
+                <div class="col-md-4 col-lg-2 mb-3">
+                    <a asp-controller="Tournament" asp-action="Index" class="btn btn-info text-white w-100 py-3 shadow-sm">
+                        <i class="bi bi-trophy-fill d-block mb-1"></i> Tournament Management
+                    </a>
+                </div>
+                <div class="col-md-4 col-lg-2 mb-3">
+                    <a asp-controller="Match" asp-action="Index" class="btn btn-danger w-100 py-3 shadow-sm">
+                        <i class="bi bi-controller d-block mb-1"></i> Match Management
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- ================= VIEWER & PUBLIC DATA DASHBOARD ================= -->
+    <div class="viewer-section">
+        <h2 class="border-bottom pb-2 text-secondary">Analytics & Reports</h2>
+
+        @if (role == "Viewer")
+        {
+            <!-- Quick Actions for Viewer Mode -->
+            <div class="mb-4">
+                <a asp-controller="LeaderBoard" asp-action="Index" class="btn btn-dark me-2 shadow-sm">View Full Leaderboard</a>
+                <a asp-controller="TopTeams" asp-action="Index" class="btn btn-secondary shadow-sm">View Top Teams</a>
+            </div>
+        }
+
+        <div class="row">
+            <!-- Leaderboard Column -->
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-header bg-dark text-white">
+                        <h4 class="mb-0">Leaderboard</h4>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Team Name</th>
+                                        <th>Total Wins</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var team in Model.Leaderboard)
+                                    {
+                                        <tr>
+                                            <td><strong>#@team.Ranking</strong></td>
+                                            <td>@team.TeamName</td>
+                                            <td>@team.TotalWins</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Teams Column -->
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-header bg-secondary text-white">
+                        <h4 class="mb-0">Top Performing Teams</h4>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Team Name</th>
+                                        <th>Wins</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var team in Model.TopTeams)
+                                    {
+                                        <tr>
+                                            <td>@team.TeamName</td>
+                                            <td><span class="badge bg-success">@team.Wins Wins</span></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Matches Row -->
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-light">
+                        <h4 class="mb-0 text-dark">Recent Matches</h4>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover mb-0">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Team 1</th>
+                                        <th>Team 2</th>
+                                        <th>Winner</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var match in Model.RecentMatches)
+                                    {
+                                        <tr>
+                                            <td>@match.Team1?.TeamName</td>
+                                            <td>@match.Team2?.TeamName</td>
+                                            <td>
+                                                <span class="text-success font-weight-bold">
+                                                    🏆 @match.WinnerTeam?.TeamName
+                                                </span>
+                                            </td>
+                                            <td>@match.MatchDate?.ToString("yyyy-MM-dd")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+*@
+
 @model EsportsTeamManagement.ViewModels.DashboardViewModel
+@{
+    var role = Context.Session.GetString("Role");
+    bool isAdmin = string.Equals(role, "Admin", StringComparison.OrdinalIgnoreCase);
+    bool isViewer = string.Equals(role, "Viewer", StringComparison.OrdinalIgnoreCase);
+}
 
-<h2>Dashboard</h2>
+<div class="container my-4">
 
-<hr />
+    <!-- ================= PORTAL HEADER ================= -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>🎮 Esports Team Management Portal</h2>
+            <h5 class="text-muted">
+                Welcome,
+                @Context.Session.GetString("Username")
+            </h5>
+        </div>
+        <a asp-controller="Account"
+           asp-action="Logout"
+           class="btn btn-danger">
+            Logout
+        </a>
+    </div>
 
-<div>
-    <h3>Total Players : @Model.TotalPlayers</h3>
-    <h3>Total Teams : @Model.TotalTeams</h3>
-    <h3>Total Coaches : @Model.TotalCoaches</h3>
-    <h3>Total Tournaments : @Model.TotalTournaments</h3>
+    <!-- ================= ADMIN DASHBOARD ================= -->
+    @if (isAdmin)
+    {
+        <!-- Header Summary Stats (Strictly Admin Only) -->
+        <div class="row mb-4">
+
+    <div class="col-md-2">
+        <div class="card text-center bg-primary text-white">
+            <div class="card-body">
+                <h3>@Model.TotalPlayers</h3>
+                <p>Players</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="card text-center bg-success text-white">
+            <div class="card-body">
+                <h3>@Model.TotalTeams</h3>
+                <p>Teams</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="card text-center bg-warning text-dark">
+            <div class="card-body">
+                <h3>@Model.TotalCoaches</h3>
+                <p>Coaches</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center bg-info text-dark">
+            <div class="card-body">
+                <h3>@Model.TotalTournaments</h3>
+                <p>Tournaments</p>
+            </div>
+        </div>
+    </div>
 </div>
 
-<hr />
+       <!-- Management Modules (Strictly Admin Only) -->
+<div class="admin-section mb-5">
+    <h2 class="border-bottom pb-2 text-primary">Admin Dashboard</h2>
+    <h4 class="my-3">⚙️ Management Modules</h4>
+    <div class="row">
+        <div class="col-md-4 col-lg-2 mb-3">
+            <a asp-controller="Team" asp-action="Index" class="btn btn-primary w-100 py-3 shadow-sm">
+                <i class="bi bi-people-fill d-block mb-1"></i> Team Management
+            </a>
+        </div>
+        <div class="col-md-4 col-lg-2 mb-3">
+            <a asp-controller="Player" asp-action="Index" class="btn btn-success w-100 py-3 shadow-sm">
+                <i class="bi bi-person-fill d-block mb-1"></i> Player Management
+            </a>
+        </div>
+        <div class="col-md-4 col-lg-2 mb-3">
+            <a asp-controller="Coach" asp-action="Index" class="btn btn-warning w-100 py-3 shadow-sm">
+                <i class="bi bi-person-badge-fill d-block mb-1"></i> Coach Management
+            </a>
+        </div>
+        <div class="col-md-4 col-lg-2 mb-3">
+            <a asp-controller="Tournament" asp-action="Index" class="btn btn-info text-white w-100 py-3 shadow-sm">
+                <i class="bi bi-trophy-fill d-block mb-1"></i> Tournament Management
+            </a>
+        </div>
+        <div class="col-md-4 col-lg-2 mb-3">
+            <a asp-controller="Match" asp-action="Index" class="btn btn-danger w-100 py-3 shadow-sm">
+                <i class="bi bi-controller d-block mb-1"></i> Match Management
+            </a>
+        </div>
+    </div>
+</div>
 
-<h3>Top Teams</h3>
-
-<table class="table table-bordered">
-
-    <thead>
-        <tr>
-            <th>Team Name</th>
-            <th>Wins</th>
-        </tr>
-    </thead>
-
-    <tbody>
-
-    @foreach(var team in Model.TopTeams)
-    {
-        <tr>
-            <td>@team.TeamName</td>
-            <td>@team.Wins</td>
-        </tr>
     }
 
-    </tbody>
-
-</table>
-<hr />
-
-<h3>Leaderboard</h3>
-
-<table class="table table-striped">
-
-    <thead>
-
-        <tr>
-            <th>Rank</th>
-            <th>Team Name</th>
-            <th>Total Wins</th>
-        </tr>
-
-    </thead>
-
-    <tbody>
-
-    @foreach(var team in Model.Leaderboard)
+    <!-- ================= VIEWER & PUBLIC DATA DASHBOARD ================= -->
+    @if (isViewer)
     {
-        <tr>
-            <td>@team.Ranking</td>
-            <td>@team.TeamName</td>
-            <td>@team.TotalWins</td>
-        </tr>
+        <div class="viewer-section">
+            <h2 class="border-bottom pb-2 text-secondary">Analytics & Reports</h2>
+
+            <!-- Quick Actions for Viewer Mode -->
+            <div class="mb-4">
+                <a asp-controller="LeaderBoard" asp-action="Index" class="btn btn-dark me-2 shadow-sm">View Full Leaderboard</a>
+                <a asp-controller="TopTeams" asp-action="Index" class="btn btn-secondary shadow-sm">View Top Teams</a>
+            </div>
+
+            <div class="row">
+                <!-- Leaderboard Column -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-dark text-white">
+                            <h4 class="mb-0">Leaderboard</h4>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>Team Name</th>
+                                            <th>Total Wins</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var team in Model.Leaderboard)
+                                        {
+                                            <tr>
+                                                <td><strong>#@team.Ranking</strong></td>
+                                                <td>@team.TeamName</td>
+                                                <td>@team.TotalWins</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Teams Column -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-secondary text-white">
+                            <h4 class="mb-0">Top Performing Teams</h4>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Team Name</th>
+                                            <th>Wins</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var team in Model.TopTeams)
+                                        {
+                                            <tr>
+                                                <td>@team.TeamName</td>
+                                                <td><span class="badge bg-success">@team.Wins Wins</span></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Matches Row -->
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-light">
+                            <h4 class="mb-0 text-dark">Recent Matches</h4>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover mb-0">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Team 1</th>
+                                            <th>Team 2</th>
+                                            <th>Winner</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var match in Model.RecentMatches)
+                                        {
+                                            <tr>
+                                                <td>@match.Team1?.TeamName</td>
+                                                    <td>@match.Team2?.TeamName</td>
+                                                    <td>
+                                                    <span class="text-success font-weight-bold">
+                                                        🏆 @match.WinnerTeam?.TeamName
+                                                    </span>
+                                                </td>
+                                                <td>@match.MatchDate?.ToString("yyyy-MM-dd")</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     }
+</div>
 
-    </tbody>
-
-</table>
-
-<hr />
-
-<h3>Recent Matches</h3>
-
-<table class="table table-bordered">
-
-    <thead>
-        <tr>
-            <th>Team 1</th>
-            <th>Team 2</th>
-            <th>Winner</th>
-            <th>Date</th>
-        </tr>
-    </thead>
-
-    <tbody>
-
-    @foreach(var match in Model.RecentMatches)
-    {
-        <tr>
-
-            <td>@match.Team1?.TeamName</td>
-
-            <td>@match.Team2?.TeamName</td>
-
-            <td>@match.WinnerTeam?.TeamName</td>
-
-            <td>@match.MatchDate</td>
-
-        </tr>
-    }
-
-    </tbody>
-
-</table>

@@ -48,7 +48,7 @@ public class HomeController : Controller
             return Content($"Database Connection Failed: {ex.Message}");
         }
     }
-
+//below action method is used to handle errors and display an error view with relevant information.
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

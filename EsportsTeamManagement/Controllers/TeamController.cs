@@ -2,16 +2,19 @@ using Microsoft.AspNetCore.Mvc;
 using EsportsTeamManagement.Services;      // Ensures ITeamService can be found
 using EsportsTeamManagement.Models;        // Ensures Team can be found
 using EsportsTeamManagement.ViewModels;    // Ensures TeamViewModel can be found
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EsportsTeamManagement.Controllers
 {
     public class TeamController : Controller
     {
         private readonly ITeamService _teamService;
+        private readonly ICoachService _coachService;
 
-        public TeamController(ITeamService teamService)
+        public TeamController(ITeamService teamService,ICoachService coachService)
         {
             _teamService = teamService;
+            _coachService = coachService;
         }
 
         // GET: /Team/Index
@@ -23,10 +26,28 @@ namespace EsportsTeamManagement.Controllers
 
         // GET: /Team/Create
         [HttpGet]
-        public IActionResult Create()
+        /*public IActionResult Create()
         {
             return View();
         }
+        */
+        [HttpGet]
+        public IActionResult Create()
+        {
+            var coaches = _coachService.GetCoaches();
+
+            TeamViewModel model = new TeamViewModel
+            {
+                Coaches = coaches.Select(c => new SelectListItem
+                {
+                    Value = c.CoachId.ToString(),
+                    Text = c.CoachName
+                }).ToList()
+            };
+
+            return View(model);
+        }
+
 
         // POST: /Team/Create
         [HttpPost]

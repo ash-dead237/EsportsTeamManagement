@@ -13,12 +13,26 @@ namespace EsportsTeamManagement.Controllers
             _dashboardService = dashboardService;
         }
 
-        public IActionResult Index()
+       /* public IActionResult Index()
         {
             var dashboardData =
                 _dashboardService.GetDashboardData();
 
             return View(dashboardData);
         }
+        */
+        public IActionResult Index()
+
+        {
+    if (HttpContext.Session.GetString("Username") == null)
+    {
+        return RedirectToAction("Login", "Account");
+    }
+
+    var dashboardData =
+        _dashboardService.GetDashboardData();
+
+    return View(dashboardData);
+}
     }
 }

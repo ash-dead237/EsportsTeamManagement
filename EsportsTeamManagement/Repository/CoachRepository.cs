@@ -1,5 +1,5 @@
 using EsportsTeamManagement.Models;
-
+using Microsoft.EntityFrameworkCore;
 public class CoachRepository : ICoachRepository
 {
     private readonly EsportsTeamManagementDbContext _context;
@@ -15,10 +15,17 @@ public class CoachRepository : ICoachRepository
         return _context.Coaches.ToList();
     }
 
+    /* public Coach GetCoachById(int id)
+     {
+         return _context.Coaches
+                        .FirstOrDefault(c => c.CoachId == id);
+     }
+ */
     public Coach GetCoachById(int id)
     {
         return _context.Coaches
-                       .FirstOrDefault(c => c.CoachId == id);
+            .Include(c => c.Teams)
+            .FirstOrDefault(c => c.CoachId == id);
     }
 
     public void AddCoach(Coach coach)

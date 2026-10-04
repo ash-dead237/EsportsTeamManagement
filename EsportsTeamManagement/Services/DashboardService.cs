@@ -13,7 +13,6 @@ namespace EsportsTeamManagement.Services
         {
             _dashboardRepository = dashboardRepository;
         }
-
         public DashboardViewModel GetDashboardData()
         {
             return _dashboardRepository.GetDashboardData();

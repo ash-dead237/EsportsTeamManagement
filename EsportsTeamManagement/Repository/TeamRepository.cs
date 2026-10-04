@@ -1,4 +1,6 @@
- using EsportsTeamManagement.Models;
+using EsportsTeamManagement.Models;
+using Microsoft.EntityFrameworkCore;
+ 
 
 public class TeamRepository : ITeamRepository
 {
@@ -9,9 +11,16 @@ public class TeamRepository : ITeamRepository
     {
         _context = context;
     }
+    /* public Team GetTeamById(int id)
+     {
+         return _context.Teams.FirstOrDefault(t => t.TeamId == id);
+     }
+     */
     public Team GetTeamById(int id)
     {
-        return _context.Teams.FirstOrDefault(t => t.TeamId == id);
+        return _context.Teams
+            .Include(t => t.Coach)
+            .FirstOrDefault(t => t.TeamId == id);
     }
 
     // 👇 Added your Team creation logic
@@ -28,18 +37,25 @@ public class TeamRepository : ITeamRepository
 
     }
     public void DeleteTeam(int id)
-{
-    var team = _context.Teams.FirstOrDefault(t => t.TeamId == id);
-
-    if (team != null)
     {
-        _context.Teams.Remove(team);
-        _context.SaveChanges();
-    }
-}
+        var team = _context.Teams.FirstOrDefault(t => t.TeamId == id);
 
-    public List<Team> GetAllTeams()
+        if (team != null)
+        {
+            _context.Teams.Remove(team);
+            _context.SaveChanges();
+        }
+    }
+
+   /* public List<Team> GetAllTeams()
     {
         return _context.Teams.ToList();
     }
+    */
+    public List<Team> GetAllTeams()
+{
+    return _context.Teams
+        .Include(t => t.Coach)
+        .ToList();
+}
 }

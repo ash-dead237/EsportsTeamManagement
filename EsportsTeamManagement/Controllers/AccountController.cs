@@ -18,6 +18,13 @@ namespace EsportsTeamManagement.Controllers
         {
             return View();
         }
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Login", "Account");
+        }
+
 
         [HttpPost]
         public IActionResult Login(LoginViewModel model)
@@ -31,6 +38,11 @@ namespace EsportsTeamManagement.Controllers
 
             if (user != null)
             {
+                HttpContext.Session.SetString(
+                    "Username", user.Username);
+                HttpContext.Session.SetString(
+                    "Role",user.Role.RoleName);
+
                 return RedirectToAction(
                     "Index",
                     "Dashboard");

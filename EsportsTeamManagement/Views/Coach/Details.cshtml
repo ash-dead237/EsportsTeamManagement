@@ -23,6 +23,26 @@
 </div>
 
 <br />
+<hr />
+
+<h4>Teams Coached</h4>
+
+@if(Model.Teams.Any())
+{
+    <ul>
+
+    @foreach(var team in Model.Teams)
+    {
+        <li>@team.TeamName</li>
+    }
+
+    </ul>
+}
+else
+{
+    <p>No teams assigned.</p>
+    }
+
 
 <a asp-action="Index"
    class="btn btn-secondary">

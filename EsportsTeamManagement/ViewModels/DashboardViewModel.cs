@@ -2,6 +2,10 @@ using EsportsTeamManagement.ViewModels;
 using EsportsTeamManagement.Models;
 namespace EsportsTeamManagement.ViewModels
 {
+    //view model class does not contain any business logic or data access code. 
+    //It is used to transfer data between the controller and the view in an MVC application.
+    //It contains properties that represent the data to be displayed on the dashboard.
+    //view model gets data  from the repository layer and is passed to the view for rendering.
     public class DashboardViewModel
     {
         public int TotalPlayers { get; set; }

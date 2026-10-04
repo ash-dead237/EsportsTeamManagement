@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EsportsTeamManagement.ViewModels
 {
@@ -11,5 +12,6 @@ namespace EsportsTeamManagement.ViewModels
         public string Region { get; set; }
 
         public int? CoachId { get; set; }
+        public List<SelectListItem>? Coaches { get; set; }
     }
 }

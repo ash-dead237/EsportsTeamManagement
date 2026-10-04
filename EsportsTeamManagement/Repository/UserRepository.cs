@@ -1,4 +1,5 @@
 using EsportsTeamManagement.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EsportsTeamManagement.Repository
 {
@@ -14,9 +15,10 @@ namespace EsportsTeamManagement.Repository
         public User GetUser(string username, string password)
         {
             return _context.Users
-                .FirstOrDefault(x =>
-                    x.Username == username &&
-                    x.PasswordHash == password);
+.Include(u => u.Role)
+.FirstOrDefault(x =>
+x.Username == username &&
+x.PasswordHash == password);
         }
     }
 }

@@ -14,4 +14,5 @@ public partial class Coach
     public string? Email { get; set; }
 
     public virtual ICollection<Team> Teams { get; set; } = new List<Team>();
+
 }

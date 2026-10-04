@@ -27,6 +27,7 @@ namespace EsportsTeamManagement.Repository
                 TotalCoaches = _context.Coaches.Count(),
                 TotalTournaments = _context.Tournaments.Count()
             };
+            //below 
 
             dashboard.TopTeams = GetTopTeams();
             dashboard.Leaderboard = GetLeaderboard();
