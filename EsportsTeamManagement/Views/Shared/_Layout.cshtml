@@ -27,10 +27,10 @@
 
                     <!-- Right-aligned authentication links -->
                     <ul class="navbar-nav">
-                        @if (User.Identity != null && User.Identity.IsAuthenticated)
+                        @if (Context.Session.GetString("Username") is string username)
                         {
                             <li class="nav-item">
-                                <span class="nav-link text-dark me-2">Hello, @User.Identity.Name!</span>
+                                <span class="nav-link text-dark me-2">Hello, @username!</span>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-danger" asp-controller="Account" asp-action="Logout">Logout</a>

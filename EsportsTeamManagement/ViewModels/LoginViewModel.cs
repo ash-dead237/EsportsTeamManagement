@@ -4,10 +4,10 @@ namespace EsportsTeamManagement.ViewModels
 {
     public class LoginViewModel
     {
-        [Required]
-        public string Username { get; set; }
+        [Required, StringLength(50)]
+        public string Username { get; set; } = string.Empty;
 
         [Required]
-        public string Password { get; set; }
+        public string Password { get; set; } = string.Empty;
     }
 }

@@ -4,18 +4,21 @@
     <div style="border: 1px solid black; padding: 20px; border-radius: 4px;">
         <h2>Login</h2>
 
-        <form method="post">
+        <form asp-action="Login" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div>
-                <label>Username</label>
+                <label asp-for="Username"></label>
                 <input asp-for="Username" />
+                <span asp-validation-for="Username" class="text-danger"></span>
             </div>
 
             <br />
 
             <div>
-                <label>Password</label>
+                <label asp-for="Password"></label>
                 <input asp-for="Password" type="password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
             <br />
@@ -31,6 +34,10 @@
             <p style="color:red">
                 @ViewBag.Error
             </p>
+        }
+        @if (TempData["Success"] is string success)
+        {
+            <p class="text-success">@success</p>
         }
     </div>
 </div>
