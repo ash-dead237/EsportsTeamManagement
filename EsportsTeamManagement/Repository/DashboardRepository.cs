@@ -71,8 +71,6 @@ namespace EsportsTeamManagement.Repository
             return topTeams;
 
         }
-
-
 //Include related entities (Team1, Team2, WinnerTeam) to avoid lazy loading issues and fetch all necessary data in a single query.
 // Order the matches by MatchDate in descending order to get the most recent matches and limit the results to the top 5 using Take(5).
 //Finally, convert the result to a list and return it.
