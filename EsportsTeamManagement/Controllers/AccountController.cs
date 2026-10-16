@@ -32,7 +32,6 @@ namespace EsportsTeamManagement.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-
         [HttpPost]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -40,7 +39,6 @@ namespace EsportsTeamManagement.Controllers
         {
             if (!ModelState.IsValid)
                 return View(model);
-                 
             var user = _userService.ValidateUser(
                 model.Username,
                 model.Password);
@@ -60,10 +58,7 @@ namespace EsportsTeamManagement.Controllers
             //viewdata is a dictionary object that allows you to pass data from the controller to the view using key-value pairs.
             //It is useful for passsing small ammount of data.
             //viewbag is a dynamic object.
-
-
             ViewBag.Error = "Invalid Credentials";
-
             return View(model);
         }
 
@@ -96,3 +91,4 @@ namespace EsportsTeamManagement.Controllers
         }
     }
 }
+

@@ -3151,11 +3151,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\shashraf\\OneDrive - Capgemini\\EsportsTeamManagement\\EsportsTeamManagement\\EsportsTeamManagement.csproj",
+      "projectUniqueName": "c:\\Users\\shashraf\\OneDrive - Capgemini\\EsportsTeamManagement\\EsportsTeamManagement\\EsportsTeamManagement.csproj",
       "projectName": "EsportsTeamManagement",
-      "projectPath": "C:\\Users\\shashraf\\OneDrive - Capgemini\\EsportsTeamManagement\\EsportsTeamManagement\\EsportsTeamManagement.csproj",
+      "projectPath": "c:\\Users\\shashraf\\OneDrive - Capgemini\\EsportsTeamManagement\\EsportsTeamManagement\\EsportsTeamManagement.csproj",
       "packagesPath": "C:\\Users\\shashraf\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\shashraf\\OneDrive - Capgemini\\EsportsTeamManagement\\EsportsTeamManagement\\obj\\",
+      "outputPath": "c:\\Users\\shashraf\\OneDrive - Capgemini\\EsportsTeamManagement\\EsportsTeamManagement\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

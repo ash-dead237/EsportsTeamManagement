@@ -210,101 +210,149 @@
     </div>
 
     <!-- ================= ADMIN DASHBOARD ================= -->
-    @if (isAdmin)
-    {
-        <!-- Header Summary Stats (Strictly Admin Only) -->
-        <div class="row mb-4">
+    @if (isAdmin) {
+    <div class="container-fluid py-4">
+        <div class="row">
+            <!-- 1. LEFT SIDEBAR PANEL -->
+<div class="col-md-3 col-lg-2 px-0 border-end bg-light rounded shadow-sm" style="min-height: 80vh;">
+    <div class="p-3">
+        <h5 class="text-uppercase text-muted fw-bold small mb-4">Management Modules</h5>
+        <div class="nav flex-column nav-pills gap-2">
+            @{
+                // Get the current controller name from the routing context
+                string currentController = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+            }
 
-    <div class="col-md-2">
-        <div class="card text-center bg-primary text-white">
-            <div class="card-body">
-                <h3>@Model.TotalPlayers</h3>
-                <p>Players</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-2">
-        <div class="card text-center bg-success text-white">
-            <div class="card-body">
-                <h3>@Model.TotalTeams</h3>
-                <p>Teams</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-2">
-        <div class="card text-center bg-warning text-dark">
-            <div class="card-body">
-                <h3>@Model.TotalCoaches</h3>
-                <p>Coaches</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-3">
-        <div class="card text-center bg-info text-dark">
-            <div class="card-body">
-                <h3>@Model.TotalTournaments</h3>
-                <p>Tournaments</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-       <!-- Management Modules (Strictly Admin Only) -->
-<div class="admin-section mb-5">
-    <h2 class="border-bottom pb-2 text-primary">Admin Dashboard</h2>
-    <h4 class="my-3">⚙️ Management Modules</h4>
-    <div class="row">
-        @* <div class="col-md-4 col-lg-2 mb-3">
-            <a asp-controller="Team" asp-action="Index" class="btn btn-primary w-100 py-3 shadow-sm">
-                <i class="bi bi-people-fill d-block mb-1"></i> Team Management
+            <!-- Team Management Link -->
+            <a asp-controller="Team" asp-action="Index" 
+               class="nav-link d-flex align-items-center gap-2 py-2.5 @(currentController == "Team" ? "active text-white bg-primary" : "text-dark")">
+                <i class="bi bi-people-fill"></i> Team Management
             </a>
-        </div>
-        <div class="col-md-4 col-lg-2 mb-3">
-            <a asp-controller="Player" asp-action="Index" class="btn btn-success w-100 py-3 shadow-sm">
-                <i class="bi bi-person-fill d-block mb-1"></i> Player Management
-            </a>
-        </div> *@
 
-        <div class="col-md-4 col-lg-2 mb-3">
-    <a asp-controller="Team" asp-action="Index"
-       class="btn btn-primary w-100 shadow-sm"
-       style="min-height:95px;">
-        <i class="bi bi-people-fill d-block mb-1"></i>
-        Team Management
-    </a>
-</div>
+            <!-- Player Management Link -->
+            <a asp-controller="Player" asp-action="Index" 
+               class="nav-link d-flex align-items-center gap-2 py-2.5 @(currentController == "Player" ? "active text-white bg-success" : "text-dark")">
+                <i class="bi bi-person-fill"></i> Player Management
+            </a>
 
-<div class="col-md-4 col-lg-2 mb-3">
-    <a asp-controller="Player" asp-action="Index"
-       class="btn btn-success w-100 shadow-sm"
-       style="min-height:95px;">
-        <i class="bi bi-person-fill d-block mb-1"></i>
-        Player Management
-    </a>
-</div>
-        <div class="col-md-4 col-lg-2 mb-3">
-            <a asp-controller="Coach" asp-action="Index" class="btn btn-warning w-100 py-3 shadow-sm">
-                <i class="bi bi-person-badge-fill d-block mb-1"></i> Coach Management
+            <!-- Coach Management Link -->
+            <a asp-controller="Coach" asp-action="Index" 
+               class="nav-link d-flex align-items-center gap-2 py-2.5 @(currentController == "Coach" ? "active text-dark bg-warning" : "text-dark")">
+                <i class="bi bi-person-badge-fill"></i> Coach Management
             </a>
-        </div>
-        <div class="col-md-4 col-lg-2 mb-3">
-            <a asp-controller="Tournament" asp-action="Index" class="btn btn-info text-white w-100 py-3 shadow-sm">
-                <i class="bi bi-trophy-fill d-block mb-1"></i> Tournament Management
+
+            <!-- Tournament Management Link -->
+            <a asp-controller="Tournament" asp-action="Index" 
+               class="nav-link d-flex align-items-center gap-2 py-2.5 @(currentController == "Tournament" ? "active text-dark bg-info" : "text-dark")">
+                <i class="bi bi-trophy-fill"></i> Tournament Management
             </a>
-        </div>
-        <div class="col-md-4 col-lg-2 mb-3">
-            <a asp-controller="Match" asp-action="Index" class="btn btn-danger w-100 py-3 shadow-sm">
-                <i class="bi bi-controller d-block mb-1"></i> Match Management
+
+            <!-- Match Management Link -->
+            <a asp-controller="Match" asp-action="Index" 
+               class="nav-link d-flex align-items-center gap-2 py-2.5 @(currentController == "Match" ? "active text-white bg-danger" : "text-dark")">
+                <i class="bi bi-controller"></i> Match Management
             </a>
         </div>
     </div>
 </div>
 
-    }
 
+
+            <!-- 2. MAIN CONTENT AREA -->
+            <div class="col-md-9 col-lg-10 ps-md-4">
+                <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
+                    <h2 class="text-primary fw-semibold m-0">Admin Dashboard Overview</h2>
+                    <span class="badge bg-secondary p-2">System Active</span>
+                </div>
+
+                <!-- Centered Summary Metrics Grid -->
+                <div class="row justify-content-center g-3 mb-5">
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="card border-0 bg-primary bg-gradient text-white h-100 shadow-sm rounded-4">
+                            <div class="card-body text-center d-flex flex-column justify-content-center p-4">
+                                <i class="bi bi-people-fill fs-2 mb-2 op-7"></i>
+                                <h2 class="display-5 fw-bold m-0">@Model.TotalPlayers</h2>
+                                <p class="card-text text-uppercase tracking-wider small fw-medium text-white-50 m-0">Total Players</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="card border-0 bg-success bg-gradient text-white h-100 shadow-sm rounded-4">
+                            <div class="card-body text-center d-flex flex-column justify-content-center p-4">
+                                <i class="bi bi-flag-fill fs-2 mb-2 op-7"></i>
+                                <h2 class="display-5 fw-bold m-0">@Model.TotalTeams</h2>
+                                <p class="card-text text-uppercase tracking-wider small fw-medium text-white-50 m-0">Registered Teams</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="card border-0 bg-warning bg-gradient text-dark h-100 shadow-sm rounded-4">
+                            <div class="card-body text-center d-flex flex-column justify-content-center p-4">
+                                <i class="bi bi-person-badge-fill fs-2 mb-2 op-7"></i>
+                                <h2 class="display-5 fw-bold m-0">@Model.TotalCoaches</h2>
+                                <p class="card-text text-uppercase tracking-wider small fw-medium text-dark-50 m-0">Active Coaches</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="card border-0 bg-info bg-gradient text-dark h-100 shadow-sm rounded-4">
+                            <div class="card-body text-center d-flex flex-column justify-content-center p-4">
+                                <i class="bi bi-trophy-fill fs-2 mb-2 op-7"></i>
+                                <h2 class="display-5 fw-bold m-0">@Model.TotalTournaments</h2>
+                                <p class="card-text text-uppercase tracking-wider small fw-medium text-dark-50 m-0">Live Tournaments</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. ADDITIONAL CONTENT (Fills empty screen space) -->
+                <div class="row g-4">
+                    <!-- Placeholder for recent portal activities -->
+                    <div class="col-lg-7">
+                        <div class="card shadow-sm border-0 h-100 rounded-3">
+                            <div class="card-header bg-transparent border-0 pt-3">
+                                <h5 class="card-title fw-bold text-secondary m-0">Recent Portal Activity</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush small">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2.5">
+                                        <div><i class="bi bi-plus-circle-fill text-success me-2"></i>New team registration request received</div>
+                                        <span class="text-muted">Just now</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2.5">
+                                        <div><i class="bi bi-check-circle-fill text-primary me-2"></i>Tournament brackets updated successfully</div>
+                                        <span class="text-muted">2 hrs ago</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2.5">
+                                        <div><i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>Coach roster pending verification check</div>
+                                        <span class="text-muted">1 day ago</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick System Actions Summary block -->
+                    <div class="col-lg-5">
+                        <div class="card shadow-sm border-0 bg-dark text-white h-100 rounded-3">
+                            <div class="card-body p-4 d-flex flex-column justify-content-between">
+                                <div>
+                                    <h5 class="fw-bold mb-2">Portal System Monitor</h5>
+                                    <p class="text-white-50 small">Roster synchronization and player metric logging routines are operational.</p>
+                                </div>
+                                <div class="pt-3 border-top border-secondary small d-flex justify-content-between">
+                                    <span>Database: <strong class="text-success">Connected</strong></span>
+                                    <span>API Status: <strong class="text-success">99.9%</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
     <!-- ================= VIEWER & PUBLIC DATA DASHBOARD ================= -->
     @if (isViewer)
     {

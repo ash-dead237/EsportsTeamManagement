@@ -38,7 +38,6 @@ public class CoachController : Controller
         };
 
         _coachService.AddCoach(coach);
-
         return RedirectToAction("Index");
     }
     [HttpGet]
@@ -115,8 +114,4 @@ public class CoachController : Controller
 
         return View(coach);
     }
-
-
-
-
 }
